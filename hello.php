@@ -1,19 +1,16 @@
 <?php
 
-echo "整数を入力：";
-$a = trim(fgets(STDIN));
-$result = false;
-$n = (int)($a / 2);
-for ($i = 2; $i <= $n; $i++) {
-	if ($a % $i == 0) {
-		$result = true;
-	}
+$count = 0;
+do {
+	echo "整数を入力（空で次へ進む）：";
+	$a = trim(fgets(STDIN));
+	$arr[$count++] = $a;
+} while ($a != "");
+$total = 0;
+for ($i = 0; $i < count($arr); $i++) {
+	$total += $arr[$i];
 }
-if ($result) {
-	echo $a . "は、素数じゃないです。";
-} else {
-	echo $a . "は、素数です！！";
-}
+echo "合計：" . $total;
 
 ?>
 
