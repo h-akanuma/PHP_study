@@ -1,16 +1,17 @@
 <?php
 
-$count = 0;
+$count = 0:
 do {
-	echo "整数を入力（空で次へ進む）：";
+	echo "整数を入力（空で次へ進む）:";
 	$a = trim(fgets(STDIN));
-	$arr[$count++] = $a;
+	$arr[$count++] = $a
 } while ($a != "");
+
 $total = 0;
-for ($i = 0; $i < count($arr); $i++) {
-	$total += $arr[$i];
+foreach ($arr as $item) {
+	$total += $item;
 }
-echo "合計：" . $total;
+
+echo("total: " . $total);
 
 ?>
-
