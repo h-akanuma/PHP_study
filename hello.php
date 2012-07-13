@@ -1,10 +1,10 @@
 <?php
 
-$count = 0:
+$count = 0;
 do {
 	echo "整数を入力（空で次へ進む）:";
 	$a = trim(fgets(STDIN));
-	$arr[$count++] = $a
+	$arr[$count++] = $a;
 } while ($a != "");
 
 $total = 0;
