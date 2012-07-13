@@ -1,17 +1,19 @@
 <?php
 
-$count = 0;
-do {
-	echo "整数を入力（空で次へ進む）:";
-	$a = trim(fgets(STDIN));
-	$arr[$count++] = $a;
-} while ($a != "");
+$data = array(
+		'tuyano' => 'tuyano@mac.com',
+		'taro' => 'taro@yamada.com',
+		'hanako' => 'hanako@flower.jp'
+);
 
-$total = 0;
-foreach ($arr as $item) {
-	$total += $item;
+$flg = false;
+
+echo "名前を入力：";
+$a = trim(fgets(STDIN));
+if($data[$a] == null) {
+	echo "データが見つかりませんでした。";
+} else {
+	echo $a . ": " . $data[$a];
 }
-
-echo("total: " . $total);
 
 ?>
