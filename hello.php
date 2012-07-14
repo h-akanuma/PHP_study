@@ -1,7 +1,7 @@
 <?php
 
-echo "日付を入力(yyyy-mm-dd): ";
-$d = strtotime(trim(fgets(STDIN)));
-echo ceil(($d - time()) / (60 * 60 * 24)) . "日";
+echo "日数を入力：";
+$d = trim(fgets(STDIN));
+echo "今日から" . $d . "日後: " . date('Y/n/j', time() + 60 * 60 * 24 * $d);
 
 ?>
