@@ -1,13 +1,13 @@
 <?php
 
-function listFiles($path) {
-	@$dir = opendir($path) or exit("ディレクトリが開けません。");
-	while($f = readdir($dir)) echo $f . "\n";
-	closedir($dir);
+function showInfo($path) {
+	echo "Path: " . realpath($path) . "\n";
+	echo "Type: " . filetype($path) . "\nSize: " . filesize($path) . "\n";
+	echo "Modified: " . filemtime($path) . "\nAccessed: " . fileatime($path);
 }
 
-echo "ディレクトリのパスを入力：";
+echo "ファイル名を入力：";
 $a = trim(fgets(STDIN));
-listFiles($a);
+showInfo($a);
 
 ?>
