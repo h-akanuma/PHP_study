@@ -1,13 +1,8 @@
 <?php
 
-function findCsv($str) {
-	$f = @fopen('data.csv', 'rb') or exit('ファイルが開けません。');
-	while($data = fgetcsv($f, 1024)) if ($data[0] == $str) print_r ($data);
-	fclose($f);
+$root = simplexml_load_file('data.xml');
+foreach ($root->children() as $data) {
+	echo(mb_convert_encoding($data->name . "," . $data->mail . "," . $data->tel, 'utf-8', 'utf-8') . "\n");
 }
-
-echo "検索テキストを入力：";
-$a = trim(fgets(STDIN));
-findCsv($a);
 
 ?>
