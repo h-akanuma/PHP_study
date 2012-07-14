@@ -1,14 +1,14 @@
 <?php
 
-function getAddDate($n) {
-	$di = new DateInterval("P{$n}D");
-	$d = new DateTime("now");
-	return $d->add($di);
+function getDiffDate($str) {
+	$d1 = new DateTime("now");
+	$d2 = new DateTime($str);
+	return $d1->diff($d2);
 }
 
-echo "日数を入力：";
+echo "日付を入力：";
 $a = trim(fgets(STDIN));
-$d = getAddDate($a);
-echo $d->format("Y-n-j");
+$di = getDiffDate($a);
+echo $di->format("%D day %H hours %I minutes.");
 
 ?>
