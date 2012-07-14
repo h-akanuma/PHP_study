@@ -1,7 +1,14 @@
 <?php
 
-echo "整数を入力：";
+function sortArr($arr) {
+	sort ($arr, SORT_NUMERIC);
+	for ($i = 0; $i < count($arr); $i++) {
+		echo ($i + 1) . ": " . $arr[$i] . "\n";
+	}
+}
+
+echo "項目を入力（カンマで区切って記述）：";
 $a = trim(fgets(STDIN));
-for ($i = 0; $i < 100; $i++) echo rand(0, $a) . " ";
+sortArr(explode(",", $a));
 
 ?>
