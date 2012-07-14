@@ -11,30 +11,43 @@ while(true) {
 	$a = trim(fgets(STDIN));
 	switch($a) {
 		case 1:
-			$flg = false;
-			echo "名前を入力：";
+            echo "検索テキストを入力：";
 			$a = trim(fgets(STDIN));
-			foreach($data as $key => $val) {
-				if (strpos(' ' . $key , $a) != null) {
-					$flg = true;
-					echo $key . ": " . $val . "\n";
-				}
-			}
-			if ($flg == false) {
-				echo "データが見つかりませんでした。";
-			}
+			$res = findIt($a);
+			echo $res;
 			break;
 		case 2:
-			echo "検索文字を入力：";
-			$a = trim(fgets(STDIN));
-			echo "メールアドレスを入力：";
-			$b = trim(fgets(STDIN));
-			$data[$a] = $b;
+			addData();
 			break;
 		default:
 			exit(0);
 	}
 	echo "\n";
+}
+
+function addData() {
+	global $data;
+	echo "名前を入力：";
+	$a = trim(fgets(STDIN));
+	echo "メールアドレスを入力：";
+	$b = trim(fgets(STDIN));
+	$data[$a] = $b;
+}
+
+function findIt($fstr) {
+	global $data;
+	$flg = false;
+	$result = "";
+	foreach ($data as $key => $val) {
+		if (strpos(' ' . $key, $fstr) != null) {
+			$flg = true;
+			$result .= $key . ": " . $val . "\n";
+		}
+	}
+	if ($flg == false) {
+		$result = "データが見つかりませんでした。";
+	}
+	return $result;
 }
 
 ?>
