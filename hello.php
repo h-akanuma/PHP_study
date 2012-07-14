@@ -1,13 +1,15 @@
 <?php
 
-function showText($f) {
-	$f = @fopen($f, 'rb') or exit('ファイルが読み込めませんでした。');
-	while (!feof($f)) echo fgets($f, 21) . "\n";
+function saveText($str) {
+	$f = @fopen('save.txt', 'ab') or exit('ファイルアクセスに失敗しました。');
+	fputs($f, $str . "\n");
 	fclose($f);
 }
 
-echo "ファイル名を入力：";
+echo "テキストを入力：";
 $a = trim(fgets(STDIN));
-showText($a);
+saveText($a);
+echo "\n";
+readfile('save.txt');
 
 ?>
