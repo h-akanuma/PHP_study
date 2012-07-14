@@ -1,9 +1,9 @@
 <?php
 
 function sortArr($arr) {
-	sort ($arr, SORT_NUMERIC);
-	for ($i = 0; $i < count($arr); $i++) {
-		echo ($i + 1) . ": " . $arr[$i] . "\n";
+	asort($arr, SORT_STRING);
+	foreach($arr as $key => $value) {
+		echo $key . ": " . $value . "\n";
 	}
 }
 
