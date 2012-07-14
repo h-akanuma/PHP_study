@@ -1,16 +1,8 @@
 <?php
 
 function replace ($str, $f, $r) {
-	$n = mb_strpos($str, $f, 0, 'utf-8');
-	$s = mb_substr($str, 0, $n, 'utf-8') 
-		 . $r 
-		 . mb_substr(
-				$str, 
-				$n + mb_strlen($f, 'utf-8'), 
-				mb_strlen($str, 'utf-8'), 
-				'utf-8'
-		   );
-	return $s;
+	$str2 = str_replace($f, $r, $str);
+	return $str2;
 }
 
 echo "テキストを入力：";
