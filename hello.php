@@ -2,7 +2,7 @@
 
 echo "テキストを入力：";
 $a = trim(fgets(STDIN));
-echo strlen($a) . "文字あります。";
+echo mb_strlen($a, 'utf-8') . "文字あります。";
 
 ?>
 
