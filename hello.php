@@ -2,6 +2,6 @@
 
 echo "ファイル名を入力：";
 $a = trim(fgets(STDIN));
-readfile($a);
+@readfile($a) or exit('※ファイルが読み込めませんでした。');
 
 ?>
