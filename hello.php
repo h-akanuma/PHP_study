@@ -1,13 +1,7 @@
 <?php
 
-function copyFile($f) {
-	$path = getcwd() . "/backup";
-	if (!file_exists($path)) mkdir ($path);
-	copy(getcwd() . "/" . $f, $path . "/" . $f);
-}
-
-echo "ファイル名を入力：";
+echo "整数を入力：";
 $a = trim(fgets(STDIN));
-copyFile($a);
+for ($i = 0; $i < 100; $i++) echo rand(0, $a) . " ";
 
 ?>
