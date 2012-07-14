@@ -1,31 +1,59 @@
 <?php
 
-$data = array();
-MyDataContainer::start();
+new MyDataContainer();
 
-class MyData {
-	public $name = "";
+abstract class MyData {
+	public $name;
+	abstract function writeData();
+}
+
+class PersonalData extends MyData {
+	public $age = 0;
+	public $address = "";
+
+	function __construct($name, $age, $address) {
+		$this->name = $name;
+		$this->age = $age;
+		$this->address = $address;
+	}
+
+	function writeData() {
+		echo "[" . $this->name . "]\n";
+		echo "年齢: " . $this->age . "\n";
+		echo "住所:  " . $this->address . "\n\n";
+	}
+}
+
+class BusinessData extends MyData {
+	public $corp = "";
 	public $mail = "";
 	public $tel = "";
 
-	function __construct($name, $mail, $tel) {
+	function __construct($name, $corp, $mail, $tel) {
 		$this->name = $name;
+		$this->corp = $corp;
 		$this->mail = $mail;
 		$this->tel = $tel;
 	}
 
 	function writeData() {
-		echo "[" . $this->name . "]\n";
-		echo "mail: " . $this->mail . "\n";
-		echo "tel:  " . $this->tel . "\n\n";
+		echo "[" . $this->name . "@" . $this->corp. "]\n";
+		echo "MAIL: " . $this->mail . "\n";
+		echo "TEL:  " . $this->tel . "\n\n";
 	}
 }
 
 class MyDataContainer {
+	public $data;
 
-	static function start() {
+	function __construct() {
+		$this->data = array();
+		$this->start();
+	}
+
+	function start() {
 		while(true) {
-			echo "検索=1, 入力=2 : ";
+			echo "検索=1, 入力(p)=2, 入力(b)=3 : ";
 			$a = trim(fgets(STDIN));
 			switch($a) {
 				case 1:
@@ -34,7 +62,10 @@ class MyDataContainer {
 					MyDataContainer::findIt($a);
 					break;
 				case 2:
-					MyDataContainer::addData();
+					$this->addPData();
+					break;
+				case 3:
+					$this->addBData();
 					break;
 				default:
 					exit(0);
@@ -43,23 +74,34 @@ class MyDataContainer {
 		}
 	}
 
-	static function addData() {
-		global $data;
+	function addPData() {
 		echo "名前を入力：";
 		$a = trim(fgets(STDIN));
-		echo "メールアドレスを入力：";
+		echo "年齢を入力：";
 		$b = trim(fgets(STDIN));
-		echo "電話番号を入力：";
+		echo "住所を入力：";
 		$c = trim(fgets(STDIN));
-		$obj = new MyData($a, $b, $c);
-		array_push($data, $obj);
+		$obj = new PersonalData($a, $b, $c);
+		array_push($this->data, $obj);
 	}
 
-	static function findIt($fstr) {
-		global $data;
+	function addBData() {
+		echo "名前を入力：";
+		$a = trim(fgets(STDIN));
+		echo "会社名を入力：";
+		$b = trim(fgets(STDIN));
+		echo "メールアドレスを入力：";
+		$c = trim(fgets(STDIN));
+		echo "電話番号を入力：";
+		$d = trim(fgets(STDIN));
+		$obj = new BusinessData($a, $b, $c, $d);
+		array_push($this->data, $obj);
+	}
+
+	function findIt($fstr) {
 		$flg = false;
 		$result = "";
-		foreach($data as $obj) {
+		foreach($this->data as $obj) {
 			if (strpos(' ' . $obj->name, $fstr) != null) {
 				$flg = true;
 				$obj->writeData();
