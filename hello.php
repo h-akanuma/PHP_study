@@ -1,7 +1,7 @@
 <?php
 
-echo "日時を入力：";
-$a = trim(fgets(STDIN));
-print_r(new DateTime($a));
+echo "フォーマットを入力：";
+$d = new DateTime("now");
+echo $d->format(trim(fgets(STDIN)));
 
 ?>
