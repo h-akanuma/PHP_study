@@ -1,20 +1,15 @@
 <?php
 
-$data = array(
-		'tuyano' => 'tuyano@mac.com',
-		'taro' => 'taro@yamada.com',
-		'hanako' => 'hanako@flower.jp'
-);
+$data = array();
 
 while(true) {
-	echo "検索=1, 入力=2 :";
+	echo "検索=1, 入力=2 : ";
 	$a = trim(fgets(STDIN));
 	switch($a) {
 		case 1:
-            echo "検索テキストを入力：";
+			echo "検索テキストを入力：";
 			$a = trim(fgets(STDIN));
-			$res = findIt($a);
-			echo $res;
+			findIt($a);
 			break;
 		case 2:
 			addData();
@@ -22,7 +17,18 @@ while(true) {
 		default:
 			exit(0);
 	}
-	echo "\n";
+}
+
+class MyData {
+	public $name = "";
+	public $mail = "";
+	public $tel = "";
+
+	function writeData() {
+		echo $this->name . "\n";
+		echo "mail: " . $this->mail . "\n";
+		echo "tel:  " . $this->tel . "\n\n";
+	}
 }
 
 function addData() {
@@ -31,23 +37,28 @@ function addData() {
 	$a = trim(fgets(STDIN));
 	echo "メールアドレスを入力：";
 	$b = trim(fgets(STDIN));
-	$data[$a] = $b;
+	echo "電話番号を入力：";
+	$c = trim(fgets(STDIN));
+	$obj = new MyData();
+	$obj->name = $a;
+	$obj->mail = $b;
+	$obj->tel = $c;
+	array_push($data, $obj);
 }
 
 function findIt($fstr) {
 	global $data;
 	$flg = false;
 	$result = "";
-	foreach ($data as $key => $val) {
-		if (strpos(' ' . $key, $fstr) != null) {
+	foreach($data as $obj) {
+		if (strpos(' ' . $obj->name, $fstr) != null) {
 			$flg = true;
-			$result .= $key . ": " . $val . "\n";
+			$obj->writeData();
 		}
 	}
 	if ($flg == false) {
-		$result = "データが見つかりませんでした。";
+		echo "データが見つかりませんでした。";
 	}
-	return $result;
 }
 
 ?>
