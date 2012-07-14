@@ -1,7 +1,7 @@
 <?php
 
-echo "日付を入力(yyyy-mm-dd): ";
+echo "フォーマット(Y/y/m/n/d/j): ";
 $a = trim(fgets(STDIN));
-echo "タイムスタンプ：" . strtotime($a);
+echo date($a, time());
 
 ?>
