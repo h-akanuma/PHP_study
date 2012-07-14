@@ -1,14 +1,14 @@
 <?php
 
-function sortArr($arr) {
-	asort($arr, SORT_STRING);
-	foreach($arr as $key => $value) {
-		echo $key . ": " . $value . "\n";
+function setUnique($arr) {
+	$arr2 = array_unique($arr);
+	foreach($arr2 as $value) {
+		echo $value . " ";
 	}
 }
 
 echo "項目を入力（カンマで区切って記述）：";
 $a = trim(fgets(STDIN));
-sortArr(explode(",", $a));
+setUnique(explode(",", $a));
 
 ?>
