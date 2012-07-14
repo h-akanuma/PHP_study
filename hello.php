@@ -1,15 +1,18 @@
 <?php
 
-function explodeNow($str) {
-	$arr = explode (" ", $str);
-	for ($i = 0; $i < count($arr); $i++) {
-		echo $i . ": " . $arr[$i] . "\n";
-	}
+function implodeNow($arr) {
+	$str = implode (", ", $arr);
+	echo $str . "。";
 }
 
-echo "テキストを入力：";
-$a = trim(fgets(STDIN));
-explodeNow($a);
+$arr = array();
+while(true) {
+	echo "テキストを入力：";
+	$a = trim(fgets(STDIN));
+	if ($a == "") { break; }
+	array_push($arr, $a);
+}
+implodeNow($arr);
 
 ?>
 
