@@ -1,17 +1,16 @@
 <?php
 
-function replace ($str, $f, $r) {
-	$str2 = str_replace($f, $r, $str);
-	return $str2;
+function change($str, $k) {
+	if ($k == 'u') return strtoupper($str);
+	if ($k == 'l') return strtolower($str);
+	if ($k == 'w') return ucwords($str);
 }
 
 echo "テキストを入力：";
 $a = trim(fgets(STDIN));
-echo "検索テキストを入力：";
+echo "変換キーを入力(u, l, w): ";
 $b = trim(fgets(STDIN));
-echo "置換テキストを入力：";
-$c = trim(fgets(STDIN));
-echo "[置換済みテキスト]\n" . replace($a, $b, $c);
+echo "[変換済み]\n" . change($a, $b);
 
 ?>
 
