@@ -1,7 +1,13 @@
 <?php
 
-echo "項目を入力（カンマで区切って記述）：";
-$arr = explode(",", trim(fgets(STDIN)));
-echo array_search('PHP', $arr);
+function showCsv($fname) {
+	$f = @fopen($fname, 'rb') or exit('ファイルが開けません。');
+	while(!feof($f)) print_r(fgetcsv($f, 1024));
+	fclose($f);
+}
+
+echo "ファイル名を入力：";
+$a = trim(fgets(STDIN));
+showCsv($a);
 
 ?>
