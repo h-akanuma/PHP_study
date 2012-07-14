@@ -1,6 +1,7 @@
 <?php
 
-new SuperMyDataContainer();
+$data = array();
+MyDataContainer::start();
 
 class MyData {
 	public $name = "";
@@ -20,36 +21,9 @@ class MyData {
 	}
 }
 
-class SuperMyData extends MyData {
-	public $web = "";
-	public $memo = "";
-
-	function __construct($name, $mail, $tel, $web, $memo) {
-		$this->name = $name;
-		$this->mail = $mail;
-		$this->tel = $tel;
-		$this->web = $web;
-		$this->memo = $memo;
-	}
-
-	function writeData() {
-		echo "[" . $this->name . "]\n";
-		echo "mail: " . $this->mail . "\n";
-		echo "tel: " . $this->tel . "\n";
-		echo "web: " . $this->web . "\n";
-		echo "memo: " . $this->memo . "\n\n";
-	}
-}
-
 class MyDataContainer {
-	public $data = null;
 
-	function __construct() {
-		$this->data = array();
-		$this->start();
-	}
-
-	function start() {
+	static function start() {
 		while(true) {
 			echo "検索=1, 入力=2 : ";
 			$a = trim(fgets(STDIN));
@@ -57,10 +31,10 @@ class MyDataContainer {
 				case 1:
 					echo "検索テキストを入力：";
 					$a = trim(fgets(STDIN));
-					$this->findIt($a);
+					MyDataContainer::findIt($a);
 					break;
 				case 2:
-					$this->addData();
+					MyDataContainer::addData();
 					break;
 				default:
 					exit(0);
@@ -69,7 +43,8 @@ class MyDataContainer {
 		}
 	}
 
-	function addData() {
+	static function addData() {
+		global $data;
 		echo "名前を入力：";
 		$a = trim(fgets(STDIN));
 		echo "メールアドレスを入力：";
@@ -77,46 +52,15 @@ class MyDataContainer {
 		echo "電話番号を入力：";
 		$c = trim(fgets(STDIN));
 		$obj = new MyData($a, $b, $c);
-		array_push($this->data, $obj);
+		array_push($data, $obj);
 	}
 
-	function findIt($fstr) {
+	static function findIt($fstr) {
+		global $data;
 		$flg = false;
 		$result = "";
-		foreach($this->data as $obj) {
+		foreach($data as $obj) {
 			if (strpos(' ' . $obj->name, $fstr) != null) {
-				$flg = true;
-				$obj->writeData();
-			}
-		}
-		if ($flg == false) {
-			echo "データが見つかりませんでした。";
-		}
-	}
-}
-
-class SuperMyDataContainer extends MyDataContainer {
-
-	function addData() {
-		echo "名前を入力：";
-		$a = trim(fgets(STDIN));
-		echo "メールアドレスを入力：";
-		$b = trim(fgets(STDIN));
-		echo "電話番号を入力：";
-		$c = trim(fgets(STDIN));
-		echo "Webサイトを入力：";
-		$d = trim(fgets(STDIN));
-		echo "メモを入力：";
-		$e = trim(fgets(STDIN));
-		$obj = new SuperMyData($a, $b, $c, $d, $e);
-		array_push($this->data, $obj);
-	}
-
-	function findIt($fstr) {
-		$flg = false;
-		$result = "";
-		foreach($this->data as $obj) {
-			if(strpos(' ' . $obj->name, $fstr) != null) {
 				$flg = true;
 				$obj->writeData();
 			}
