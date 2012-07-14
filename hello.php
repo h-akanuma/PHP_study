@@ -1,13 +1,17 @@
 <?php
 
-function showCsv($fname) {
-	$f = @fopen($fname, 'rb') or exit('ファイルが開けません。');
-	while(!feof($f)) print_r(fgetcsv($f, 1024));
+function addToCsv($name, $mail, $tel) {
+	$f = @fopen('data.csv', 'ab') or exit('ファイルが開けません。');
+	fputcsv($f, array($name, $mail, $tel));
 	fclose($f);
 }
 
-echo "ファイル名を入力：";
+echo "名前を入力:";
 $a = trim(fgets(STDIN));
-showCsv($a);
+echo "メールアドレスを入力：";
+$b = trim(fgets(STDIN));
+echo "電話番号を入力：";
+$c = trim(fgets(STDIN));
+addToCsv($a, $b, $c);
 
 ?>
