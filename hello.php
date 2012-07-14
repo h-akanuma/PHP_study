@@ -1,15 +1,13 @@
 <?php
 
-function saveText($str) {
-	$f = @fopen('save.txt', 'ab') or exit('ファイルアクセスに失敗しました。');
-	fputs($f, $str . "\n");
-	fclose($f);
+function listFiles($path) {
+	@$dir = opendir($path) or exit("ディレクトリが開けません。");
+	while($f = readdir($dir)) echo $f . "\n";
+	closedir($dir);
 }
 
-echo "テキストを入力：";
+echo "ディレクトリのパスを入力：";
 $a = trim(fgets(STDIN));
-saveText($a);
-echo "\n";
-readfile('save.txt');
+listFiles($a);
 
 ?>
